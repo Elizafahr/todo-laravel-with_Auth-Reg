@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -33,29 +34,25 @@ class TodoController extends Controller
         return redirect()->route('todos.index');
     }
 
+
     public function edit(Task $todo)
     {
         return view('todos.edit', compact('todo'));
     }
 
-    public function update(Request $request, Task $Task)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-        ]);
+    public function update(Request $request, Task $todo)
+{
+    $todo->title = $request->input('title');
+    $todo->completed = $request->input('completed') === 'on' ? 1 : 0;
+    $todo->save();
 
-        $Task->title = $request->input('title');
-        $Task->description = $request->input('description');
-        $Task->save();
-
-        return redirect()->route('todos.index');
-    }
+    return redirect()->route('todos.index');
+}
 
     public function destroy(Task $todo)
     {
         $todo->delete();
-         
+
         return redirect()->route('todos.index');
     }
 
