@@ -20,17 +20,25 @@ Route::get('/', function () {
 })->name('home');
 
 
-Route::get('/todos', [TodoController::class, 'index'])->name('todos.index');
+// Route::get('/todos', [TodoController::class, 'index'])->name('todos.index');
 
-Route::get('/todos/create', [TodoController::class, 'create'])->name('todos.create');
-Route::post('/todos', [TodoController::class, 'store'])->name('todos.store');
+// Route::get('/todos/create', [TodoController::class, 'create'])->name('todos.create');
+// Route::post('/todos', [TodoController::class, 'store'])->name('todos.store'); 
 
-// Route::get('/todos/{id}/edit', [TodoController::class, 'edit'])->name('todos.edit');
-// Route::patch('/todos/{id}', [TodoController::class, 'update'])->name('todos.update');
+// Route::delete('/todos/{todo}', [TodoController::class, 'destroy'])->name('todos.destroy');
+// Route::delete('/todos/{todo}', [TodoController::class, 'destroy'])->name('todos.destroy');
+// Route::patch('/todos/{todo}/status', [TodoController::class, 'updateStatus'])->name('todos.updateStatus');
 
-Route::delete('/todos/{todo}', [TodoController::class, 'destroy'])->name('todos.destroy');
-Route::delete('/todos/{todo}', [TodoController::class, 'destroy'])->name('todos.destroy');
-Route::patch('/todos/{todo}/status', [TodoController::class, 'updateStatus'])->name('todos.updateStatus');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/todos', [TodoController::class, 'index'])->name('todos.index');
+    Route::get('/todos/create', [TodoController::class, 'create'])->name('todos.create');
+    Route::post('/todos', [TodoController::class, 'store'])->name('todos.store');
+    Route::delete('/todos/{todo}', [TodoController::class, 'destroy'])->name('todos.destroy');
+    Route::patch('/todos/{todo}/status', [TodoController::class, 'updateStatus'])->name('todos.updateStatus');
+    Route::get('/todos/{todo}', [TodoController::class, 'edit'])->name('todos.edit');
+    Route::patch('/todos/{todo}', [TodoController::class, 'update'])->name('todos.update');
+});
 
 
 

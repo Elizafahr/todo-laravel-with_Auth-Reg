@@ -39,7 +39,10 @@
     <div class="container">
         <div class="jumbotron">
             <h1 class="display-4">Добро пожаловать в todo-app!</h1>
-            <p class="lead">sss</p>
+            <p class="lead">
+                <a href="/todos" class="btn btn-primary mt-5">Перейти к списку задач</a>
+
+            </p>
         </div>
     </div>
 
